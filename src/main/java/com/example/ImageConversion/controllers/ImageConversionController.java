@@ -4,6 +4,7 @@ import com.example.ImageConversion.dto.FileResponse;
 import com.example.ImageConversion.services.ImageConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ public class ImageConversionController {
         this.imageConversion = imageConversion;
     }
 
-
+    @GetMapping
     public ResponseEntity<?> convertImageToAscii(@RequestParam("file") MultipartFile file) throws Exception{
         if (file == null || file.isEmpty()) {
             return ResponseEntity.badRequest().body("Пустой файл");
