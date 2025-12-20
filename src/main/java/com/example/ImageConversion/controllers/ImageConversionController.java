@@ -2,6 +2,7 @@ package com.example.ImageConversion.controllers;
 
 import com.example.ImageConversion.dto.FileResponse;
 import com.example.ImageConversion.services.ImageConversionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/files")
+@Tag(name = "Image Conversion", description = "API для конвертации изображений в ASCII арт")
 public class ImageConversionController {
     private ImageConversionService imageConversion;
 

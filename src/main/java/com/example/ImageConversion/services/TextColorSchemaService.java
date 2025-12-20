@@ -1,6 +1,8 @@
 package com.example.ImageConversion.services;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class TextColorSchemaService {
     private static final char[] ASCII_CHARS = {'#', '$', '@', '%', '*', '+', '-', '\''};
 
