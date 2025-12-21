@@ -15,9 +15,9 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Image Conversion API")
                         .description("API для конвертации изображений в ASCII арт")
-                        .version("1.0.0")
-                        .contact(new Contact()
+                        .version("1.0.0"));
+                       /* .contact(new Contact()
                                 .name("Image Conversion Team")
-                                .email("support@example.com")));
+                                .email("support@example.com")));*/
     }
 }
