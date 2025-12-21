@@ -2,8 +2,11 @@ package com.example.ImageConversion.controllers;
 
 import com.example.ImageConversion.dto.FileResponse;
 import com.example.ImageConversion.services.ImageConversionService;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/files")
-//@Tag(name = "Image Conversion", description = "API для конвертации изображений в ASCII арт")
+@Scope("request")
 public class ImageConversionController {
     private ImageConversionService imageConversion;
 
@@ -20,8 +23,18 @@ public class ImageConversionController {
         this.imageConversion = imageConversion;
     }
 
+
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = FileResponse.class)
+                    )
+            )
+    })
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> convertImageToAscii(@RequestParam("file")
+    public ResponseEntity<?> convertImageToAscii(@RequestPart("file")
                                                  @Schema(type = "string", format = "binary")
                                                  MultipartFile file) throws Exception {
         if (file == null || file.isEmpty()) {
