@@ -11,8 +11,6 @@ public class ImageConversionApplication {
 
 		SpringApplication.run(ImageConversionApplication.class, args);
 		System.out.println("Swagger UI доступен по:");
-		System.out.println("http://localhost:8080/swagger-ui/index.html");
-		System.out.println("http://localhost:8080/swagger-ui/");
 		System.out.println("http://localhost:8080/swagger-ui.html");
 	}
 
