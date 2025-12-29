@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImageConversionService {
     private TextColorSchemaService colorSchema;
+    private TextGraphicsConverterService converterService;
 
-    public ImageConversionService(TextColorSchemaService colorSchema){
+    public ImageConversionService(TextColorSchemaService colorSchema,
+                                  TextGraphicsConverterService converterService) {
         this.colorSchema = colorSchema;
+        this.converterService = converterService;
     }
 
-    public String convertToAscii(byte[] file){
-        return null;
+    public String convertToAscii(byte[] file) throws Exception {
+        var result = converterService.convert(file);
+        return result;
     }
 }
