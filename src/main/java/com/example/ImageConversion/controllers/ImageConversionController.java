@@ -1,6 +1,7 @@
 package com.example.ImageConversion.controllers;
 
 import com.example.ImageConversion.dto.FileResponse;
+import com.example.ImageConversion.dto.ImageParams;
 import com.example.ImageConversion.services.ImageConversionService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,7 +37,11 @@ public class ImageConversionController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> convertImageToAscii(@RequestPart("file")
                                                  @Schema(type = "string", format = "binary")
-                                                 MultipartFile file) throws Exception {
+                                                 MultipartFile file,
+                                                 @RequestParam ImageParams imageParams) throws Exception {
+
+
+
         if (file == null || file.isEmpty()) {
             return ResponseEntity.badRequest().body("Пустой файл");
         }

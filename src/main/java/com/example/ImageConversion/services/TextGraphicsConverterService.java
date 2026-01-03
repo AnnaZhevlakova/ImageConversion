@@ -1,5 +1,6 @@
 package com.example.ImageConversion.services;
 
+import com.example.ImageConversion.dto.ImageParams;
 import com.example.ImageConversion.exceptions.UserException;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +13,21 @@ import java.io.IOException;
 
 @Service
 public class TextGraphicsConverterService {
-    private int maxWidth;
-    private int maxHeight;
-    private double maxRatio;
-    private TextColorSchemaService schema;
+    private final TextColorSchemaService schema;
 
-    public TextGraphicsConverterService() {
-        maxWidth = -1;
-        maxHeight = -1;
-        maxRatio = -1;
-        schema = new TextColorSchemaService();
+    public TextGraphicsConverterService(TextColorSchemaService schema) {
+        this.schema = schema;
     }
 
-    public String convert(byte[] file) throws IOException {
+    public String convert(byte[] file,ImageParams imageParams) throws IOException {
         try (ByteArrayInputStream bais = new ByteArrayInputStream(file)) {
             BufferedImage img = ImageIO.read(bais);
             int width = img.getWidth();
             int height = img.getHeight();
+
+            double maxRatio = imageParams.getMaxRatio();
+            int maxWidth = imageParams.getMaxWidth();
+            int maxHeight = imageParams.getMaxHeight();
 
             double ratio = width > height
                     ? (double) width / height

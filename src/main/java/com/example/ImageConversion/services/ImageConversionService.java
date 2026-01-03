@@ -1,5 +1,6 @@
 package com.example.ImageConversion.services;
 
+import com.example.ImageConversion.dto.ImageParams;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class ImageConversionService {
     private TextColorSchemaService colorSchema;
     private TextGraphicsConverterService converterService;
+    private ImageParams imageParams;
 
     public ImageConversionService(TextColorSchemaService colorSchema,
                                   TextGraphicsConverterService converterService) {
@@ -16,7 +18,7 @@ public class ImageConversionService {
     }
 
     public String convertToAscii(byte[] file) throws Exception {
-        var result = converterService.convert(file);
+        var result = converterService.convert(file,imageParams);
         return result;
     }
 }
