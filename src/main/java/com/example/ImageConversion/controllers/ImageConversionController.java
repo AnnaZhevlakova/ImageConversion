@@ -46,7 +46,7 @@ public class ImageConversionController {
             return ResponseEntity.badRequest().body("Пустой файл");
         }
         var fileData = file.getBytes();
-        var result = imageConversion.convertToAscii(fileData);
+        var result = imageConversion.convertToAscii(fileData,imageParams);
         var fileResponse = new FileResponse(result);
         return ResponseEntity.status(HttpStatus.OK).body(fileResponse);
 

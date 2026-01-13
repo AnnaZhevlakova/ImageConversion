@@ -17,7 +17,7 @@ public class ImageConversionService {
         this.converterService = converterService;
     }
 
-    public String convertToAscii(byte[] file) throws Exception {
+    public String convertToAscii(byte[] file,ImageParams imageParams) throws Exception {
         var result = converterService.convert(file,imageParams);
         return result;
     }
