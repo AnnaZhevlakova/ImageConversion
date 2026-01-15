@@ -6,12 +6,6 @@ public class ImageParams {
     private double maxRatio;
 
 
-    public ImageParams(int maxWidth,int maxHeight,double maxRatio){
-        this.maxWidth = maxWidth;
-        this.maxHeight = maxHeight;
-        this.maxRatio = maxRatio;
-    }
-
     public int getMaxWidth() {
         return maxWidth;
     }

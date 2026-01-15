@@ -38,7 +38,7 @@ public class ImageConversionController {
     public ResponseEntity<?> convertImageToAscii(@RequestPart("file")
                                                  @Schema(type = "string", format = "binary")
                                                  MultipartFile file,
-                                                 @RequestParam ImageParams imageParams) throws Exception {
+                                                 @ModelAttribute ImageParams imageParams) throws Exception {
 
 
 
