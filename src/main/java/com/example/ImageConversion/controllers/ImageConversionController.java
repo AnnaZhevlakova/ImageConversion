@@ -39,13 +39,19 @@ public class ImageConversionController {
     public ResponseEntity<?> convertImageToAscii(@RequestPart("file")
                                                  @Schema(type = "string", format = "binary")
                                                  MultipartFile file,
-                                                 @ModelAttribute ImageParams imageParams) throws Exception {
+                                                 @RequestParam() Integer maxWidth,
+                                                 @RequestParam() Integer maxHeight,
+                                                 @RequestParam() Double maxRatio) throws Exception {
 
 
 
         if (file == null || file.isEmpty()) {
            throw new UserException("Пустой файл");
         }
+        var imageParams = new ImageParams();
+        imageParams.setMaxWidth(maxWidth);
+        imageParams.setMaxHeight(maxHeight);
+        imageParams.setMaxRatio(maxRatio);
         var fileData = file.getBytes();
         var result = imageConversion.convertToAscii(fileData,imageParams);
         var fileResponse = new FileResponse(result);
