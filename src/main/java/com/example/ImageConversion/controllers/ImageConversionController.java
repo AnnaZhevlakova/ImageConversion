@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/files")
 @Scope("request")
@@ -39,9 +41,9 @@ public class ImageConversionController {
     public ResponseEntity<?> convertImageToAscii(@RequestPart("file")
                                                  @Schema(type = "string", format = "binary")
                                                  MultipartFile file,
-                                                 @RequestParam() Integer maxWidth,
-                                                 @RequestParam() Integer maxHeight,
-                                                 @RequestParam() Double maxRatio) throws Exception {
+                                                 @RequestParam() Optional<Integer> maxWidth,
+                                                 @RequestParam() Optional<Integer> maxHeight,
+                                                 @RequestParam() Optional<Double> maxRatio) throws Exception {
 
 
 
@@ -49,9 +51,26 @@ public class ImageConversionController {
            throw new UserException("Пустой файл");
         }
         var imageParams = new ImageParams();
-        imageParams.setMaxWidth(maxWidth);
-        imageParams.setMaxHeight(maxHeight);
-        imageParams.setMaxRatio(maxRatio);
+
+        if (maxWidth.isPresent()){
+            imageParams.setMaxWidth(maxWidth.get());
+        }else{
+            imageParams.setMaxWidth(-1);
+        }
+
+        if (maxHeight.isPresent()){
+            imageParams.setMaxHeight(maxHeight.get());
+        }else{
+            imageParams.setMaxHeight(-1);
+        }
+
+
+       if(maxRatio.isPresent()){
+           imageParams.setMaxRatio(maxRatio.get());
+       }else{
+           imageParams.setMaxRatio(-1);
+       }
+
         var fileData = file.getBytes();
         var result = imageConversion.convertToAscii(fileData,imageParams);
         var fileResponse = new FileResponse(result);
