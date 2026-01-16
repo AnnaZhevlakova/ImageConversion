@@ -46,33 +46,32 @@ public class ImageConversionController {
                                                  @RequestParam() Optional<Double> maxRatio) throws Exception {
 
 
-
         if (file == null || file.isEmpty()) {
-           throw new UserException("Пустой файл");
+            throw new UserException("Пустой файл");
         }
         var imageParams = new ImageParams();
 
-        if (maxWidth.isPresent()){
+        if (maxWidth.isPresent()) {
             imageParams.setMaxWidth(maxWidth.get());
-        }else{
+        } else {
             imageParams.setMaxWidth(-1);
         }
 
-        if (maxHeight.isPresent()){
+        if (maxHeight.isPresent()) {
             imageParams.setMaxHeight(maxHeight.get());
-        }else{
+        } else {
             imageParams.setMaxHeight(-1);
         }
 
 
-       if(maxRatio.isPresent()){
-           imageParams.setMaxRatio(maxRatio.get());
-       }else{
-           imageParams.setMaxRatio(-1);
-       }
+        if (maxRatio.isPresent()) {
+            imageParams.setMaxRatio(maxRatio.get());
+        } else {
+            imageParams.setMaxRatio(-1);
+        }
 
         var fileData = file.getBytes();
-        var result = imageConversion.convertToAscii(fileData,imageParams);
+        var result = imageConversion.convertToAscii(fileData, imageParams);
         var fileResponse = new FileResponse(result);
         return ResponseEntity.status(HttpStatus.OK).body(fileResponse);
 

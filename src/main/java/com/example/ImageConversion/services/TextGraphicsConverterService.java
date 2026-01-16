@@ -19,7 +19,7 @@ public class TextGraphicsConverterService {
         this.schema = schema;
     }
 
-    public String convert(byte[] file,ImageParams imageParams) throws IOException {
+    public String convert(byte[] file, ImageParams imageParams) throws IOException {
         try (ByteArrayInputStream bais = new ByteArrayInputStream(file)) {
             BufferedImage img = ImageIO.read(bais);
             int width = img.getWidth();
