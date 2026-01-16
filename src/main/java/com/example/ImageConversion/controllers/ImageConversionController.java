@@ -2,6 +2,7 @@ package com.example.ImageConversion.controllers;
 
 import com.example.ImageConversion.dto.FileResponse;
 import com.example.ImageConversion.dto.ImageParams;
+import com.example.ImageConversion.exceptions.UserException;
 import com.example.ImageConversion.services.ImageConversionService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -43,7 +44,7 @@ public class ImageConversionController {
 
 
         if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("Пустой файл");
+           throw new UserException("Пустой файл");
         }
         var fileData = file.getBytes();
         var result = imageConversion.convertToAscii(fileData,imageParams);
